@@ -1,0 +1,141 @@
+Game
+	Variables
+		Level_BG: TileLayer
+		towerSheet: Image
+		entitySheet: Image
+		projectileSheet: Image
+		Entities[]: Entity
+		Towers[]: Tower
+		Projectiles[]: Projectile
+		taken_towers[]: boolean
+		selected_tile: int
+		game_finished: boolean
+		popup_pressed: boolean
+		currentLevel: Level
+	Functions
+		Update // FRAEKING ALL STAR FUNCTION EVER
+			update() {
+				while(!game_finished) {
+					if game is over, break;
+					if game is paused, gamePaused() {
+						if any entities have died, level.entities[].remove();
+						if any entities are in tower range, Projectiles[].add(new Projectile());
+						move all entities
+						move all projectiles
+					}
+					
+					if level is over, currentLevel = Levels.nextLevel();
+				}
+				
+				repaint();
+			}
+		KeyPressed/PointerPressed
+			keyPressed(int keyCode) {
+				if(!game_finished) {
+					if directional buttons pressed, moveSelectedTile(String direction);
+					if FIRE/KEY_NUM5 pressed
+						if NO tower
+							pauseGame();
+							currentLevel.addTower();
+						else, display popupForAddingTower();
+				}
+				
+				if KEY_POUND/KEY_STAR/KEY_NUM0 is pressed, m.goToMenu();
+			}
+		Paint
+			paint(Graphics g) {
+				paintLevel();
+				if towers[] is NOT NULL, paintTowers();
+				
+				if game_finished
+					if lives > 0, wuhooPaint();
+					else bahaPaint();
+				
+				if currentLevel.entities.length > 0, paintEntities();
+				if projectiles[] is NOT NULL, paintProjectiles();
+				if popup_pressed is TRUE, paintPopupForAddingTower();
+			}
+		Game Paused
+			gamePaused() {
+			
+			}
+		
+Levels
+	Variables
+		MAX_LEVELS: int
+		currentLevel: int
+		level_one: Level
+		..
+		level_fifteen: Level
+	Constructor
+		Levels() {
+			currentLevel = 1;
+			level_one = new Level(1, "easy", positions[]);
+			..
+			level_fifteen = new Level(15, "hard", positions[]);
+		}
+	Functions
+		Next Level
+			Level nextLevel() {
+				if level_one, return level_two
+			}
+Level
+	Variables
+		levelNumber: int
+		waveArray[]: int
+		fixed_positions[]: Vector
+		taken_positions[]: boolean
+	Constructor
+		new Level(int levelNumber, String waveType, Vector positions[]);
+	Functions
+		Add Tower
+			addTower(String type
+		
+Tower
+	Variables
+		Type: String
+		Position (vector, width, height): int
+		Sprites (current, selected): Sprite
+		Projectiles[]: Projectile
+		isSelected: boolean
+	Constructor
+		Tower(String type, Image towerSheet, Vector level.fixed_position, boolean[] level.taken_positions) {
+			isSelected = false;
+		}
+	Functions
+		Attack
+			attack(Entity entity) this.sprite.collidesWith(entity);
+		Update
+			update(Entity[] entities) {
+				for(int i = 0; i < entities.length; i++) {
+					if(any entity is within range)
+						attack(entity);
+				}
+			}
+		Paint
+			paint(Graphics g) {
+				if(selected) selectedSprite.paint(g);
+				else, currentSprite.paint(g);
+			}
+		AddTower
+			addTower(boolean[] taken_towers, int _fixed_position) {
+				if(taken_towers[_fixed_position] == false) {
+					
+				}
+			}
+		UpgradeTower
+		
+Projectile
+	Variables
+		sprite: Sprite
+		currentPosition: Vector
+		targetPosition: Vector
+		damage: int
+	Constructor
+		new Projectile(Image projectileSheet, Vector startingPosition, Vector targetPosition, int damage);
+	Functions
+		Update
+			update() {
+				if within radius of targetPosition, 
+			}
+	
