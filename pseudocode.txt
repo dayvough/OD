@@ -79,17 +79,21 @@ Levels
 			Level nextLevel() {
 				if level_one, return level_two
 			}
+
 Level
 	Variables
 		levelNumber: int
 		waveArray[]: int
 		fixed_positions[]: Vector
 		taken_positions[]: boolean
+		isFinished: boolean
 	Constructor
 		new Level(int levelNumber, String waveType, Vector positions[]);
 	Functions
 		Add Tower
-			addTower(String type
+			addTower(String type, Image towerSheet, Vector fixed_position[x], boolean taken_positions[]);
+		Spawn Waves
+			spawnWaves(waveArray[x]); // use old OBJECTP modulator
 		
 Tower
 	Variables
